@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# PyInstaller and packaging output
+build/
+dist/
+engine-dist/
+ui-dist/
+
+# Build and runtime logs
+*.log
+
+# Packaged releases
+*.zip
+
+# IDE and OS metadata
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
