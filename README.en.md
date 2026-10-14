@@ -62,24 +62,29 @@ graph TD
 | Component | Requirement |
 | --- | --- |
 | Operating system | Windows 10/11 |
-| Release package | No Python installation required, but keep the `engine` directory intact |
-| Source build | Python 3.14 with Tcl/Tk |
+| Option 1: Use the release | No Python installation required, but keep the `engine` directory intact |
+| Option 2: Build locally | Python 3.14 with Tcl/Tk |
 | MCP engine | A sibling [Windows-MCP](https://github.com/CursorTouch/Windows-MCP) source checkout |
 | Qt UI (optional) | CMake 3.21+, Qt 6.5+ (Widgets, Network) |
 
 ## Installation
 
-### Use the Built Package
+There are two ways to use the project:
 
-After building, run:
+### Option 1: Download the Release (Recommended)
 
-```powershell
-.\dist\QZdeskConnector\QZdeskConnector.exe
-```
+Use this option if you only want to run the connector. It does not require Python or a local build.
 
-`QZdeskConnector.exe` requires `engine\QZdeskMcpEngine.exe` in the same release directory. Distribute the whole `dist\QZdeskConnector` folder instead of copying only the executable.
+1. Open the [Releases](https://github.com/QZzwj/winmcp-connector/releases/latest) page.
+2. Download `QZdeskConnector-Windows.zip`.
+3. Extract it to any directory.
+4. Run `QZdeskConnector\QZdeskConnector.exe`.
 
-### Build from Source
+`QZdeskConnector.exe` requires `engine\QZdeskMcpEngine.exe` in the same release directory. Keep the extracted directory structure intact; do not move only the executable.
+
+### Option 2: Modify the Code and Build Locally
+
+Use this option for secondary development, UI changes, or custom Windows-MCP integration. Prepare Windows 10/11, Python 3.14 with Tcl/Tk, and a sibling `Windows-MCP` checkout.
 
 <details>
 <summary>Windows one-command build</summary>
@@ -113,7 +118,7 @@ The script performs the following steps:
 > [!WARNING]
 > `requirements.txt` pins PyPI `windows-mcp==0.8.8`, but `build.ps1` replaces it with the sibling source checkout. The sibling checkout is what gets packaged, so make sure it is on the revision or branch you intend to ship.
 
-### Build the Qt UI (Optional)
+### Qt UI (Optional)
 
 `main.cpp` provides a Qt UI that does not depend on Python. It requires manually entered IP addresses and does not implement discovery or pairing.
 

@@ -62,24 +62,29 @@ graph TD
 | 组件 | 要求 |
 | --- | --- |
 | 操作系统 | Windows 10/11 |
-| 运行发行包 | 无需安装 Python，但必须保留完整的 `engine` 目录 |
-| 源码构建 | Python 3.14，安装时必须包含 Tcl/Tk |
+| 方案一：直接使用 Release | 无需安装 Python，但必须保留完整的 `engine` 目录 |
+| 方案二：自行构建 | Python 3.14，安装时必须包含 Tcl/Tk |
 | MCP 引擎 | 与项目目录同级的 [Windows-MCP](https://github.com/CursorTouch/Windows-MCP) 源码 |
 | Qt 版界面（可选） | CMake 3.21+、Qt 6.5+（Widgets、Network） |
 
 ## 安装
 
-### 使用构建产物
+提供两种使用方式：
 
-构建完成后，直接运行：
+### 方案一：直接下载 Release（推荐）
 
-```powershell
-.\dist\QZdeskConnector\QZdeskConnector.exe
-```
+适合只想直接使用的用户，不需要安装 Python，也不需要自行编译。
 
-`QZdeskConnector.exe` 依赖同目录下的 `engine\QZdeskMcpEngine.exe`。分发时应整体打包 `dist\QZdeskConnector`，不要只复制单个 exe 文件。
+1. 打开 [Releases](https://github.com/QZzwj/winmcp-connector/releases/latest) 页面。
+2. 下载 `QZdeskConnector-Windows.zip`。
+3. 解压到任意目录。
+4. 运行 `QZdeskConnector\QZdeskConnector.exe`。
 
-### 从源码构建
+`QZdeskConnector.exe` 依赖同目录下的 `engine\QZdeskMcpEngine.exe`。请保持解压后的目录结构完整，不要只移动单个 exe 文件。
+
+### 方案二：修改代码并自行构建
+
+适合需要二次开发、修改界面或调整 Windows-MCP 集成的用户。请在开始前准备 Windows 10/11、Python 3.14（含 Tcl/Tk），并保证 `Windows-MCP` 与 `winmcp-connector` 位于同一个父目录。
 
 <details>
 <summary>Windows 一键构建步骤</summary>
@@ -113,7 +118,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 > [!WARNING]
 > `requirements.txt` 固定了 PyPI 上的 `windows-mcp==0.8.8`，但 `build.ps1` 随后会用同级源码覆盖安装。最终打包进发行包的是同级 `Windows-MCP` 目录的版本，请确保该目录处于你期望的提交或分支。
 
-### 构建 Qt 版界面（可选）
+### Qt 版界面（可选）
 
 `main.cpp` 提供不依赖 Python 的 Qt 界面，需要手动填写电脑 IP 和设备 IP，不包含设备发现与配对流程。
 
