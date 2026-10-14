@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 .venv/
-venv/
 
 # PyInstaller and packaging output
 build/
@@ -15,9 +14,3 @@ ui-dist/
 
 # Packaged releases
 *.zip
-
-# IDE and OS metadata
-.vscode/
-.idea/
-Thumbs.db
-desktop.ini
